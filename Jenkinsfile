@@ -6,9 +6,18 @@ pipeline {
         sh '/home/ec2-user/tools/MVN_3.3.9/bin/mvn install -Dmaven.test.skip=true'
       }
     }
-    stage('') {
+    stage('test') {
       steps {
-        sh '/home/ec2-user/tools/MVN_3.3.9/bin/mvn test'
+        parallel(
+          "test": {
+            sh '/home/ec2-user/tools/MVN_3.3.9/bin/mvn test'
+            
+          },
+          "analysis": {
+            sh '/home/ec2-user/tools/MVN_3.3.9/bin/mvn javadoc:javadoc -Dmaven.javadoc.failOnError=false'
+            
+          }
+        )
       }
     }
   }
