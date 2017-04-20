@@ -7,4 +7,7 @@ pipeline {
       }
     }
   }
+  environment {
+    JAVA_HOME = '/home/ec2-user/tools/Java_8'
+  }
 }
