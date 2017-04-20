@@ -3,7 +3,7 @@ pipeline {
   stages {
         stage('build') {
             steps {
-                sh 'mvn --version'
+                sh '/home/ec2-user/tools/MVN_3.3.9/bin/mvn install'
             }
         }
     }
