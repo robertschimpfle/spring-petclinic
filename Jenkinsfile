@@ -1,17 +1,12 @@
 pipeline {
   agent any
-  environment {
-    JAVA_HOME = '/home/ec2-user/tools/Java_8'
-  }
-  tools {
-    maven "MVN 3.3"
-  }
   stages {
     stage('build') {
       steps {
-        timeout(time: 1000) {
+        timeout(time: 5, unit: 'MINUTES') {
           sh 'mvn install -Dmaven.test.skip=true'
         }
+        
       }
     }
     stage('test') {
@@ -33,5 +28,11 @@ pipeline {
         echo 'Fertig'
       }
     }
+  }
+  tools {
+    maven 'MVN 3.3'
+  }
+  environment {
+    JAVA_HOME = '/home/ec2-user/tools/Java_8'
   }
 }
