@@ -1,5 +1,11 @@
 pipeline {
   agent any
+  environment {
+    JAVA_HOME = '/home/ec2-user/tools/Java_8'
+  }
+  tools {
+    maven "MVN 3.3"
+  }
   stages {
     stage('build') {
       steps {
@@ -25,8 +31,5 @@ pipeline {
         echo 'Fertig'
       }
     }
-  }
-  environment {
-    JAVA_HOME = '/home/ec2-user/tools/Java_8'
   }
 }
