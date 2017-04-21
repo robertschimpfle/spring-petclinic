@@ -9,7 +9,7 @@ pipeline {
   stages {
     stage('build') {
       steps {
-        timeout(time:"1000") {
+        timeout(time: 1000) {
           sh 'mvn install -Dmaven.test.skip=true'
         }
       }
