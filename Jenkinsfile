@@ -20,6 +20,11 @@ pipeline {
         )
       }
     }
+    stage('') {
+      steps {
+        echo 'Fertig'
+      }
+    }
   }
   environment {
     JAVA_HOME = '/home/ec2-user/tools/Java_8'
