@@ -1,38 +1,22 @@
-pipeline {
-  agent any
-  stages {
-    stage('build') {
-      steps {
-        timeout(time: 5, unit: 'MINUTES') {
-          sh 'mvn install -Dmaven.test.skip=true'
-        }
-        
-      }
-    }
-    stage('test') {
-      steps {
-        parallel(
-          "test": {
-            sh 'mvn test'
-            
-          },
-          "analysis": {
-            sh 'mvn javadoc:javadoc -Dmaven.javadoc.failOnError=false'
-            
-          }
-        )
-      }
-    }
-    stage('Report') {
-      steps {
-        echo 'Fertig'
-      }
-    }
-  }
-  tools {
-    maven 'MVN 3.3'
-  }
-  environment {
-    JAVA_HOME = '/home/ec2-user/tools/Java_8'
-  }
+node {
+    def mvnHome
+    mvnHome = tool 'MVN 3.3'
+    env.JAVA_HOME = tool 'Java 8'
+   
+   stage('Preparation') { // for display purposes
+        git 'https://github.com/spring-projects/spring-petclinic.git'
+   }
+ 
+   stage('Build') {
+      sh "'${mvnHome}/bin/mvn' install -Dmaven.test.skip=true"
+   }
+ 
+   stage('Test') {
+      sh "'${mvnHome}/bin/mvn' test"
+   }
+
+   stage('Results') {
+      junit '**/target/surefire-reports/TEST-*.xml'
+      archive 'target/*.jar'
+   }
 }
