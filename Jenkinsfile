@@ -12,7 +12,11 @@ node {
    }
  
    stage('Test') {
-      sh "'${mvnHome}/bin/mvn' test"
+       parallel (
+           "test":     {sh "'${mvnHome}/bin/mvn' test"},
+           "analysis": {sh "'${mvnHome}/bin/mvn' findbugs:findbugs"},
+           "docu":     {sh "'${mvnHome}/bin/mvn' javadoc:javadoc"}
+       )
    }
 
    stage('Results') {
