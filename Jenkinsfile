@@ -13,9 +13,14 @@ node {
  
    stage('Test') {
        parallel (
-           "test":     {sh "'${mvnHome}/bin/mvn' test"},
-           "analysis": {sh "'${mvnHome}/bin/mvn' findbugs:findbugs"},
-           "docu":     {sh "'${mvnHome}/bin/mvn' javadoc:javadoc -Dmaven.javadoc.failOnError=false"}
+           "test":     {
+               sh "'${mvnHome}/bin/mvn' test"},
+           "analysis": {
+               sh "'${mvnHome}/bin/mvn' findbugs:findbugs"
+               sh "'${mvnHome}/bin/mvn' checkstyle:checkstyle"
+               sh "'${mvnHome}/bin/mvn' pmd:pmd"},
+           "docu":     {
+               sh "'${mvnHome}/bin/mvn' javadoc:javadoc -Dmaven.javadoc.failOnError=false"}
        )
    }
 
