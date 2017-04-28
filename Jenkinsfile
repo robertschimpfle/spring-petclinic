@@ -19,8 +19,13 @@ node {
        )
    }
 
-   stage('Results') {
+   stage('Report') {
       junit '**/target/surefire-reports/TEST-*.xml'
       archive 'target/*.jar'
+   }
+    
+   stage('Deploy') {
+      sleep 10
+      echo "PerClinic deployed"
    }
 }
