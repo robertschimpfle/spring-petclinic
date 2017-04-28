@@ -15,7 +15,7 @@ node {
        parallel (
            "test":     {sh "'${mvnHome}/bin/mvn' test"},
            "analysis": {sh "'${mvnHome}/bin/mvn' findbugs:findbugs"},
-           "docu":     {sh "'${mvnHome}/bin/mvn' javadoc:javadoc"}
+           "docu":     {sh "'${mvnHome}/bin/mvn' javadoc:javadoc -Dmaven.javadoc.failOnError=false"}
        )
    }
 
