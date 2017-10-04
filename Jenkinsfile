@@ -1,7 +1,7 @@
 node() {
     def mvnHome
     mvnHome = tool 'MVN 3.3'
-    env.JAVA_HOME = tool 'Java 8'
+    // env.JAVA_HOME = tool 'Java 8'
    
    stage('Preparation') { // for display purposes
         git 'https://github.com/spring-projects/spring-petclinic.git'
