@@ -4,8 +4,12 @@ multibranchPipelineJob('spring-petclinic') {
             remote(SCM_URL)
         }
     }
+    triggers {
+        periodic(1)
+    }
     orphanedItemStrategy {
         discardOldItems {
+            daysToKeep(14)
             numToKeep(20)
         }
     }
