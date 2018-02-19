@@ -8,15 +8,12 @@ node {
     }
 
     stage('Build') {
-        sh 'sudo docker build -t mypetclinic .'
+        withMaven(....) {
+            sh 'mvn package'
+        }
     }
     
     stage('Test') {
-        try {
-            sh "sudo docker run --name ${container_name} -e SCM_URL='${scm_url}' -p 8081:8080 myjenkins"
-        } finally {
-            sh "sudo docker stop ${container_name}"
-            sh "sudo docker rm ${container_name}"
-        }
+        // mvn...
     }
 }
