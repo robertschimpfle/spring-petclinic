@@ -1,4 +1,12 @@
-job('hello') {
-
+multibranchPipelineJob('spring-petclinic') {
+    branchSources {
+        git {
+            remote(SCM_URL)
+        }
+    }
+    orphanedItemStrategy {
+        discardOldItems {
+            numToKeep(20)
+        }
+    }
 }
-
