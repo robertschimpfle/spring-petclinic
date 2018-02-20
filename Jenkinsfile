@@ -8,7 +8,7 @@ node {
     }
 
     stage('Build') {
-        withMaven(....) {
+        withMaven(jdk: 'JDK 8', maven: 'MVN 3.5') {
             sh 'mvn package'
         }
     }
