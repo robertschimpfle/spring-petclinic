@@ -1,7 +1,8 @@
-import jenkins.*;
-import jenkins.model.*;
-import hudson.*;
-import hudson.model.*;
+import jenkins.*
+import hudson.*
+import hudson.model.*
+import jenkins.model.*
+import hudson.tools.*
 
 // Set up Maven.
 mavenName = "MVN 3.5"
