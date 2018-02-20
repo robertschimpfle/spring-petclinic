@@ -23,11 +23,12 @@ mavenPlugin.save()
 def jdkInstaller = new JDKInstaller('Java SE Development Kit 8u162', true)
 def jdkInstallerProps = new InstallSourceProperty([jdkInstaller])
 def jdkInstallation = new JDK('JDK 8', "", [jdkInstallerProps])
-installations.push(jdkInstallation)
+def jdkInstallations = []
+jdkInstallations.push(jdkInstallation)
 
 def inst = Jenkins.getInstance()
 
 def desc = inst.getDescriptor("hudson.model.JDK")
-desc.setInstallations(installations.toArray(new JDK[0]))
+desc.setInstallations(jdkInstallations.toArray(new JDK[0]))
 
 desc.save() 
