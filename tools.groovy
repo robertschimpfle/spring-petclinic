@@ -20,7 +20,7 @@ mavenPlugin.installations += newMavenInstall
 mavenPlugin.save()
 
 // Set up JDK.
-def jdkInstaller = new JDKInstaller('jdk-8u162-linux-x64', true)
+def jdkInstaller = new JDKInstaller('jdk-8u162-oth-JPR', true)
 def jdkInstallerProps = new InstallSourceProperty([jdkInstaller])
 def jdkInstallation = new JDK('JDK 8', "", [jdkInstallerProps])
 def jdkInstallations = []
