@@ -12,7 +12,7 @@ mavenVersion = "3.5.2"
 mavenPlugin = Jenkins.instance.getExtensionList(hudson.tasks.Maven.DescriptorImpl.class)[0]
  
 // Add an installation.
-newMavenInstall = new hudson.tasks.Maven.MavenInstallation('maven-3', null,
+newMavenInstall = new hudson.tasks.Maven.MavenInstallation(mavenName, null,
     [new hudson.tools.InstallSourceProperty([new hudson.tasks.Maven.MavenInstaller(mavenVersion)])]
 )
 
