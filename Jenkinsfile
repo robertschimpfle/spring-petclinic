@@ -1,19 +1,27 @@
-def scm_url = 'https://github.com/comquent/spring-petclinic.git'
-def container_name = 'ci_spring-petclinic'
 node {
-
-    stage('Checkout') {
+    stage('Init') {
         deleteDir()
-        git(url: scm_url)
+        echo "Where we are?"
+        echo "PWD = " + pwd
+        echo "WORKSPACE = " + workspace
     }
-
+    stage('Checkout') {
+        checkout scm
+    }
     stage('Build') {
-        withMaven(jdk: 'JDK 8', maven: 'MVN 3.5') {
-            sh 'mvn package'
+        withMaven(maven: 'MVN.3.5.2') {
+            sh "mvn clean install -Dmaven.test.skip=true"
         }
-    }
-    
-    stage('Test') {
-        // mvn...
+    }   
+    stage('Test & Analyse') {
+        withMaven(maven: 'MVN.3.5.2') {
+            parallel (
+                test: { sh "mvn test" },
+                analyse: { sh "mvn findbugs:findbugs" }
+            )
+        }
+    }   
+    stage('report') {
+        junit '**/target/surefire-reports/TEST-*.xml'
     }
 }
